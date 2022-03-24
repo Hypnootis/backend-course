@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, make_response
 app = Flask(__name__)
 
-allstudents = {[
+allstudents = [
     {
         "student_number": 123123,
         "name": "Alice Brown",
@@ -20,15 +20,23 @@ allstudents = {[
         "credits": 57,
         "degree": "machine"
     }
-]}
+]
 
-@app.route("/students", methods=["GET"])
+@app.route("/students", methods=["GET", "POST"])
 def students():
-    return allstudents
+    new_request = request.get_json()
+    if new_request:
+        
 
-@app.route("/")
-def index():
-    return "hello world"
+    return make_response(jsonify(allstudents), 200)
+
+@app.route("/students/<degree>", methods=["GET"])
+def degrees(degree):
+    degree_students = []
+    for student in allstudents:
+        if student["degree"] == degree:
+            degree_students.append(student)
+    return make_response(jsonify(degree_students))
 
 if __name__ == "__main__":
     app.run(debug = True)

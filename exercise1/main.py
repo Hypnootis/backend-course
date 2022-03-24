@@ -26,9 +26,10 @@ allstudents = [
 def students():
     new_request = request.get_json()
     if new_request:
-        
-
-    return make_response(jsonify(allstudents), 200)
+        allstudents.append(new_request)
+        return make_response(jsonify(new_request), 200)
+    else:
+        return "Request must contain data in json format", 400
 
 @app.route("/students/<degree>", methods=["GET"])
 def degrees(degree):

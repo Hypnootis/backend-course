@@ -1,3 +1,4 @@
+from queue import Empty
 from flask import Flask, request, jsonify, make_response
 app = Flask(__name__)
 
@@ -24,10 +25,10 @@ allstudents = [
 
 @app.route("/students", methods=["GET", "POST"])
 def students():
-    new_request = request.get_json()
-    if new_request:
-        allstudents.append(new_request)
-        return make_response(jsonify(new_request), 200)
+    request_data = request.get_json()
+    if request_data:
+        allstudents.append(request_data)
+        return make_response(jsonify(request_data), 200)
     else:
         return "Request must contain data in json format", 400
 
@@ -37,7 +38,10 @@ def degrees(degree):
     for student in allstudents:
         if student["degree"] == degree:
             degree_students.append(student)
-    return make_response(jsonify(degree_students))
+    if len(degree_students) != 0:
+        return make_response(jsonify(degree_students))
+    else:
+        return "No students matching this degree"
 
 if __name__ == "__main__":
     app.run(debug = True)

@@ -1,6 +1,5 @@
-from queue import Empty
-from flask import Flask, request, jsonify, make_response
-app = Flask(__name__)
+from flask import Flask, request, jsonify, make_response, render_template
+app = Flask(__name__, template_folder="src")
 
 allstudents = [
     {
@@ -42,6 +41,9 @@ def degrees(degree):
         return make_response(jsonify(degree_students))
     else:
         return "No students matching this degree"
+@app.route("/", methods=["GET", "POST"])
+def forms():
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug = True)

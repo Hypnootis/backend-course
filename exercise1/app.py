@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, make_response, render_template
-app = Flask(__name__, template_folder="src")
+from flask import Flask, request, jsonify, make_response, render_template, url_for
+app = Flask(__name__, template_folder="static")
 
+all_items = []
 allstudents = [
     {
         "student_number": 123123,
@@ -38,12 +39,25 @@ def degrees(degree):
         if student["degree"] == degree:
             degree_students.append(student)
     if len(degree_students) != 0:
-        return make_response(jsonify(degree_students))
+        return make_response(jsonify(degree_students), 200)
     else:
         return "No students matching this degree"
+
 @app.route("/", methods=["GET", "POST"])
 def forms():
-    return render_template("index.html")
+    if request.method == "POST":
+        new_item = request.form
+        if new_item not in all_items:
+            for key in new_item:
+                if new_item[key] == "":
+                    return f"Item was not added. Item must have a {key}."
+                    break
+                else:
+                    all_items.append(new_item)
+        return jsonify(all_items)
+    else:
+        return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.debug = True
+    app.run()

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise1</title>
+        <link href="{{url_for("static", filename="styles.css")}}" rel="stylesheet">
+    </head>
+    <body>
+        <form action="#" method="post">
+            <label for="name">Name of product: </label>
+            <input type="text" name="name">
+            <br>
+            <label for="category">Category: </label>
+            <select name="category">
+                <option value="drink">Drink</option>
+                <option value="food">Dood</option>
+            </select>
+            <br>
+            <label for="price">Price: </label>
+            <input type="text" name="price">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

@@ -3,22 +3,34 @@
     <head>
         <title>Exercise1</title>
         <link href="{{url_for("static", filename="styles.css")}}" rel="stylesheet">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
-        <form action="#" method="post">
-            <label for="name">Name of product: </label>
-            <input type="text" name="name">
-            <br>
-            <label for="category">Category: </label>
-            <select name="category">
-                <option value="drink">Drink</option>
-                <option value="food">Dood</option>
-            </select>
-            <br>
-            <label for="price">Price: </label>
-            <input type="text" name="price">
-            <br>
-            <input type="submit" value="Submit">
+        <form action="#">
+            <script>
+                function createTable(response){
+                    var tableData = response.data
+                    var table = document.createElement("table")
+                    var row, cell = {}
+
+                    tableData.forEach(function (rowData) {
+                        row = table.insertRow(-1)
+                        for (cellKey in rowData){
+                            cell = row.insertCell()
+                            cell.textContent = rowData[cellKey]
+                        }
+                    });
+                    document.body.appendChild(table)
+                }
+
+                axios.get("http://localhost:5000/students")
+                .then(function (response){
+                    createTable(response)
+                })
+                .catch(function (error){
+                    console.log(error)
+                })
+            </script>
         </form>
     </body>
 </html>

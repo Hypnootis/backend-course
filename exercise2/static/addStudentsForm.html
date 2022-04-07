@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise1</title>
+        <link href="{{url_for("static", filename="styles.css")}}" rel="stylesheet">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <form action="#" method="post">
+            <label for="student_number">Student_number: </label>
+            <br>
+            <input type="text" name="student_number">
+            <br>
+            <label for="name">Student name: </label>
+            <br>
+            <input type="text" name="name">
+            <br>
+            <label for="credits">Credits: </label>
+            <br>
+            <input type="text" name="credits">
+            <br>
+            <label for="degree">Degree programme: </label>
+            <br>
+            <input type="text" name="degree">
+            <br>
+            <input type="submit" value="Add">
+        </form>
+
+        <script>
+            window.addEventListener("load", ()=>{
+                const form = document.querySelector("form")
+                form.addEventListener("submit", (e)=>{
+                    e.preventDefault()
+                    let data = new FormData(form)
+                    axios({
+                        method: "post",
+                        url: "/add",
+                        data: data
+                    })
+                    .then((res)=>{
+                        if (res.status == 200){
+                            form.reset()
+                            alert("Student added")
+                        }
+                    })
+                    .catch((err) => {throw err})
+                })
+            })
+        </script>
+    </body>
+</html>

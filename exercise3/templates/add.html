@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+{%extends "base.html"%}
+{%block title%}Add student{%endblock%}
+{%block head%}
+{{super()}}
+{%endblock%}
 
-<html>
-    <head>
+{%block content%}
+<h3><b>Modify the student</b></h3>
+<form>
+    <label for="name">Name: </label>
+    <input type="text" name="name"><br>
 
-    </head>
-    <body>
-        <p>hello</p>
-    </body>
-</html>
+</form>
+
+{%endblock%}

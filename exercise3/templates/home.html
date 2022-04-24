@@ -5,6 +5,16 @@
 {%endblock%}
 
 {%block content%}
-<h1>Welcome to the home page!</h1>
-<p>Glad to see you here</p>
+<table>
+    {%for student in my_students%}
+    <tr>
+        <td><a href="{{url_for('add')}}">Add</a></td>
+        <td>&emsp;{{student["student_number"]}}</td>
+        <td>&emsp;{{student["name"]}}</td>
+        <td>&emsp;{{student["degree"]}}</td>
+        <td>&emsp;{{student["credits"]}}&emsp;</td>
+        <td><a href="{{url_for('add')}}">Delete</a></td>
+    </tr>
+    {%endfor%}
+</table>
 {%endblock%}

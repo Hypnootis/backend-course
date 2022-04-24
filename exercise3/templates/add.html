@@ -5,11 +5,22 @@
 {%endblock%}
 
 {%block content%}
+{%if modify%}
 <h3><b>Modify the student</b></h3>
 <form>
     <label for="name">Name: </label>
-    <input type="text" name="name"><br>
+    <input type="text" name="name" value="{{student['name']}}"><br>
 
 </form>
+
+{%else%}
+
+<form>
+    <label for="number">Number: </label>
+    <input type="text" name="number"><br>
+
+</form>
+
+{%endif%}
 
 {%endblock%}

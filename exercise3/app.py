@@ -17,6 +17,9 @@ students = [
         "degree": "it"}
 ]
 
+modify = False
+modify_student = {}
+
 @app.route("/")
 @app.route("/home")
 def index():
@@ -24,7 +27,7 @@ def index():
 
 @app.route("/add")
 def add():
-    return render_template("add.html")
+    return render_template("add.html", modify=modify, student=students[modify_student])
 
 if __name__ == "__main__":
     app.debug = True
